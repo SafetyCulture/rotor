@@ -16,6 +16,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add support files
 COPY --from=golang /go/bin/rotor* /usr/local/bin/
+ADD envcheck.sh /usr/local/bin/envcheck.sh
 ADD rotor.sh /usr/local/bin/rotor.sh
 RUN chmod +x /usr/local/bin/rotor.sh
 
