@@ -1,4 +1,4 @@
-FROM golang:1.10.3 AS golang
+FROM golang:1.14 AS golang
 
 # Add src
 ADD . /go/src/github.com/turbinelabs/rotor
@@ -9,13 +9,14 @@ RUN go get github.com/turbinelabs/rotor/...
 # Install binaries
 RUN go install github.com/turbinelabs/rotor/...
 
-FROM phusion/baseimage:0.10.2
+FROM phusion/baseimage:18.04-1.0.0
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add support files
 COPY --from=golang /go/bin/rotor* /usr/local/bin/
+ADD envcheck.sh /usr/local/bin/envcheck.sh
 ADD rotor.sh /usr/local/bin/rotor.sh
 RUN chmod +x /usr/local/bin/rotor.sh
 
