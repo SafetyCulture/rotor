@@ -9,7 +9,7 @@ RUN go get github.com/turbinelabs/rotor/...
 # Install binaries
 RUN go install github.com/turbinelabs/rotor/...
 
-FROM phusion/baseimage:master
+FROM phusion/baseimage:18.04-1.0.0
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
